@@ -4,16 +4,17 @@ const MONSTER_ATTACK_VALUE = 14;
 const HEAL_VALUE = 20;
 
 let chosenMaxLife = 100;
-let currentMonsterHealth = chosenMaxLife;
-let currentPlayerHealth = chosenMaxLife;
-let hasBonusLife = true;
-let battleLog = [];
 
 let enteredValue = parseInt(prompt("Choose the max health value", "100"));
 
 if (!isNaN(enteredValue) && enteredValue > 0) {
   chosenMaxLife = enteredValue;
 }
+
+let currentMonsterHealth = chosenMaxLife;
+let currentPlayerHealth = chosenMaxLife;
+let hasBonusLife = true;
+let battleLog = [];
 
 adjustHealthBars(chosenMaxLife);
 
@@ -71,19 +72,19 @@ function endRound() {
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
     alert("You Lost!");
     writeToLog(
-        "GAME_OVER",
-        "You Lost!",
-        currentMonsterHealth,
-        currentPlayerHealth
-      );
+      "GAME_OVER",
+      "You Lost!",
+      currentMonsterHealth,
+      currentPlayerHealth
+    );
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
     alert("You have a draw!");
     writeToLog(
-        "GAME_OVER",
-        'You have a draw!',
-        currentMonsterHealth,
-        currentPlayerHealth
-      );
+      "GAME_OVER",
+      "You have a draw!",
+      currentMonsterHealth,
+      currentPlayerHealth
+    );
   }
 
   if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
@@ -91,22 +92,20 @@ function endRound() {
   }
 }
 
-function attackMonster(mode,event) {
+function attackMonster(mode, event) {
   const damage = dealMonsterDamage(mode);
   currentMonsterHealth -= damage;
-  
-  writeToLog(event,damage,currentMonsterHealth,currentPlayerHealth);
+
+  writeToLog(event, damage, currentMonsterHealth, currentPlayerHealth);
   endRound();
 }
 
 function attackHandler() {
-  attackMonster(ATTACK_VALUE,"PLAYER_ATTACK");
-    
+  attackMonster(ATTACK_VALUE, "PLAYER_ATTACK");
 }
 
 function strongAttackHandler() {
-  attackMonster(STRONG_ATTACK_VALUE,"STRONG_PLAYER_ATTACK");
-  
+  attackMonster(STRONG_ATTACK_VALUE, "STRONG_PLAYER_ATTACK");
 }
 
 function healPlayerHandler() {
